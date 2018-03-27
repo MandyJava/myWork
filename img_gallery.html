@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>作业一</title>
+    <title>作业一.图片展示</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -28,13 +28,13 @@
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
+            <!-- menu profile-->
             <div class="profile clearfix">
               <div class="profile_info">
                 <span>课程列表</span>
               </div>
             </div>
-            <!-- /menu profile quick info -->
+            <!-- /menu profile-->
 
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
@@ -88,7 +88,7 @@
                 <span style="border-left: solid 1px #FFFFFF;display: inline-block;padding-left:34px;"><h4>班级作品</h4></span>
               </div>
               <div class="title_right">
-                <button class="btn-primary" style="border:0px;height:30px;width:100px;margin-left: 310px;"><i class="fa fa-arrow-circle-o-up" style="margin-right:10px;"></i>提交作品</button>
+                <button id="sendTo" class="btn-primary" style="border:0px;height:30px;width:100px;margin-left: 310px;"><i class="fa fa-arrow-circle-o-up" style="margin-right:10px;"></i>提交作品</button>
                 <button class="btn-primary" style="border:0px;height:30px;width:100px;"><i class="fa fa-plus-circle" style="margin-right:10px;"></i>新建作品</button>
               </div>
             </div>
@@ -387,6 +387,10 @@
             $("#"+selectMenu).css("background-color","#21B1FB");
             $(this).css("background-color","#4F5F79");
             $("#s-"+$(this).attr("id")).css("background-color","#21B1FB");
+        });
+
+        $("#sendTo").click(function(){
+            window.location.href = "img_noning.html";
         });
 
     </script>
