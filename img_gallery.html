@@ -382,13 +382,18 @@
                       <div class="form-group">
                         <label for="inputName" class="col-sm-2 control-label">资源名称</label>
                         <div class="col-sm-6">
-                          <input type="text" class="form-control" id="inputName" >
+                          <input type="text" class="form-control" id="inputName" value="三生三世十里桃花">
                         </div>
                       </div>
                       <div class="form-group">
                         <label  class="col-sm-2 control-label">作者</label>
                         <div id="writerSpan" >
+                          <ul id="writers" style="padding-left:5px;margin-top: 2px;">
+                          </ul>
 
+                        </div>
+                        <div>
+                          <img id="addUser" src="images/add-user.jpg" width="20" height="20" style="margin-left: 14px;margin-top:40px;" />
                         </div>
                       </div>
                       <div class="form-group">
@@ -414,6 +419,67 @@
               </div>
             </div>
         <!-- 模态弹出框内容end -->
+
+      <!-- 子模态窗Modal -->
+      <div class="modal fade" id="userList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" style="border-radius: 12px;width: 400px;">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style="color: #FFFFFF;">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel2" style="text-align: center;line-height:10px;">班级成员</h4>
+            </div>
+            <div class="modal-body">
+              <div id="userLeft">
+                <div style="border-bottom: 1px solid #CCCCCC;color: #CCCCCC;height: 30px;">
+                  <!--<div contenteditable="true" >搜索人名...</div>-->
+                  <input id="userName" type="text" placeholder="搜索人名..." class="searchName"  />
+                  <i id="search" class="fa fa-search" style="font-size: 14px;position: relative;left:16px;"></i>
+                </div>
+                <div style="position:relative;height:317.5px;overflow: auto;">
+                  <ul id="nameList" class="nameListUL">
+                      <li id="user1">李冉</li>
+                      <li id="user2">涂佳佳</li>
+                      <li id="user3">李婷婷</li>
+                      <li id="user4">景逸</li>
+                      <li id="user5">肖奈</li>
+                      <li id="user6">傅奇城</li>
+                      <li id="user7">李响</li>
+                      <li id="user8">刘明凯</li>
+                      <li id="user9">白浅</li>
+                      <li id="user10">东华帝君</li>
+                      <li id="user11">墨渊上神</li>
+                      <li id="user12">贝微微</li>
+                      <li id="user13">顾思安</li>
+                      <li id="user14">叶可馨</li>
+                      <li id="user15">夜华</li>
+                      <li id="user16">周杰伦</li>
+                      <li id="user17">刘德华</li>
+                      <li id="user18">安以轩</li>
+                      <li id="user19">胡冰卿</li>
+                      <li id="user20">江疏影</li>
+                  </ul>
+                </div>
+
+              </div>
+              <div id="userCenter" style="float: left;width: 50px;">
+                <button id="btn-add" class="btn-center" style="margin-top:100px;">添加</button>
+                <button id="btn-remove" class="btn-center" >删除</button>
+              </div>
+              <div id="userRight" >
+                <ul id="addUserUL" class="nameListUL">
+                </ul>
+              </div>
+            </div>
+            <div class="modal-footer" style="text-align: right;background-color: #F0F5F9;
+                       border-bottom-right-radius:10px;border-bottom-left-radius:10px;">
+              <button id="btn-add-ok" type="button" class="btn btn-primary" style="margin-right: 20px;width:80px;">确定</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 模态弹出框内容end -->
       </div>
     </div>
 
@@ -423,6 +489,8 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
         var selectMenu;
+        var selectUser;
+        var delUser;
         $(".side-menu>li").click(function(){
             $(".side-menu>li").css("background-color","");
             $(this).css("background-color","#21B1FB");
@@ -435,15 +503,82 @@
             $(this).css("background-color","#4F5F79");
             $("#s-"+$(this).attr("id")).css("background-color","#21B1FB");
         });
-
+        //提交作品
         $("#sendTo").click(function(){
             window.location.href = "img_noning.html";
         });
-        
-        // function newWork() {
-        //     console.log("新建作品弹窗");
+        //显示子模态窗
+        $("#addUser").on('click',function(){
+            $('#userList').modal();
+        });
+        //搜索人名
+        $("#search").on('click',function(){
+            var searchLiName =  $("#userName").val();
+            $('#nameList>li').show();//全部显示
+            $('#nameList').find('li').each(function() {
+                if($(this).text().indexOf(searchLiName) < 0){
+                    $(this).hide();//不匹配隐藏
+                }
+            })
+        });
 
-        // }
+        //名字列表
+        $("#nameList").on("click","li", function(){
+            $("#nameList>li").css("background-color","");
+            $(this).css("background-color","#C2E5F9");
+            $("#btn-add").css("background-color","#17A9FA");
+            $("#btn-remove").css("background-color","#B7BFD1");
+            selectUser = $(this).attr("id");
+        });
+        $("#nameList").on("mouseover","li", function(){
+            $("#nameList>li").css("background-color","");
+            $("#"+selectUser).css("background-color","#C2E5F9");
+            $(this).css("background-color","#F0F5F9");
+        });
+
+        //添加用户
+        $("#btn-add").click(function (){
+            //新增右边选中框节点
+            $("#addUserUL").append("<li id='s-"+selectUser+"'>"+$("#"+selectUser).text()+"</li>");
+            //删除左边成员列表中节点
+            $("#"+selectUser).remove();
+        });
+
+        //删除用户
+        $("#addUserUL").on("click","li", function(){
+            $("#addUserUL>li").css("background-color","");
+            $(this).css("background-color","#C2E5F9");
+            $("#btn-add").css("background-color","#B7BFD1");
+            $("#btn-remove").css("background-color","#17A9FA");
+            delUser = $(this).attr("id");
+        });
+        $("#btn-remove").click(function (){
+            var originUser = delUser.substring(2);
+            //console.log(delUser.substring(2));
+            $("#nameList").append("<li id='"+originUser+"'>"+$("#"+delUser).text()+"</li>");
+            //删除右边选定的成员列表中的该作者
+            $("#"+delUser).remove();
+        });
+
+        //确定用户选择
+        $("#btn-add-ok").click(function (){
+           console.log($("#addUserUL").html());
+           $("#userList").modal('hide');
+           $("#writers").html($("#addUserUL").html());
+           $("#writers>li").append("<i class='fa fa-times-circle liDelPic'></i>");
+        });
+
+        //父模态窗删除用户
+        $("#writers").on("click","li>i", function(){
+           //console.log($(this).parent().attr("id"));
+            delUser = $(this).parent().attr("id");
+            $(this).parent().remove();
+            var originUser = delUser.substring(2);
+            //console.log(delUser.substring(2));
+            $("#nameList").append("<li id='"+originUser+"'>"+$("#"+delUser).text()+"</li>");
+            //删除右边选定的成员列表中的该作者
+            $("#"+delUser).remove();
+        });
 
     </script>
 

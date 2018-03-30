@@ -2234,10 +2234,63 @@ legend {
 }
 
 #writerSpan{
-    margin-left: 104px;
+    float: left;
+    margin-left: 10px;
     height: 60px;
-    width: 350px;
+    width: 320px;
     border: 1px solid #cccccc;
+}
+#writers>li{
+    list-style: none;
+    float: left;
+    margin:5px;
+}
+.liDelPic {
+    color: #E9A63B;
+    font-size: 16px;
+    margin-left: 3px;
+}
+#userLeft{
+    border: 1px solid #cccccc;
+    height: 350px;
+    width: 130px;
+    float: left;
+}
+#userRight{
+    border: 1px solid #cccccc;
+    height: 350px;
+    width: 130px;
+    margin-left:230px;
+}
+
+.btn-center {
+    border: 0px;
+    height: 30px;
+    width: 60px;
+    margin-left:20px;
+    margin-top: 30px;
+    background-color: #B7BFD1;
+    color: #FFFFFF;
+    /*box-shadow: 3px 3px 1px #888888;*/
+}
+
+.searchName {
+    font-size: 14px;
+    margin: 5px;
+    width: 80px;
+    border: 0px;
+    color: #CCCCCC;
+}
+.nameListUL {
+    list-style: none;
+    font-size: 14px;
+    padding: 10px 5px;
+}
+.nameListUL li{
+    list-style: none;
+    font-size: 12px;
+    padding: 5px 5px;
+    cursor:pointer;
 }
 .invalid-form-error-message {
     margin-top: 10px;
